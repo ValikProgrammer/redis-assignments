@@ -19,6 +19,8 @@ jobs:
             test_file: tests/test_rate_limiter.py
           - task: "Task 3: Task Queue"
             test_file: tests/test_queue.py
+          - task: "Bonus: Sliding Window"
+            test_file: tests/test_sliding_window.py
 
     name: ${{ matrix.task }}
 
