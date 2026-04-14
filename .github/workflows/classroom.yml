@@ -50,13 +50,13 @@ jobs:
         run: pytest tests/test_sliding_window.py -v
         if: always()
 
-      - name: Autograding Reporter
-        uses: education/autograding-grading-reporter@v1
-        env:
-          TASK1_RESULTS: "${{ steps.task1.outcome }}"
-          TASK2_RESULTS: "${{ steps.task2.outcome }}"
-          TASK3_RESULTS: "${{ steps.task3.outcome }}"
-          BONUS_RESULTS: "${{ steps.bonus.outcome }}"
-        with:
-          runners: task1,task2,task3,bonus
+      - name: Results
         if: always()
+        run: |
+          echo "## Results" >> $GITHUB_STEP_SUMMARY
+          echo "| Task | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Session Storage | ${{ steps.task1.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Rate Limiter | ${{ steps.task2.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Task Queue | ${{ steps.task3.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Sliding Window (bonus) | ${{ steps.bonus.outcome }} |" >> $GITHUB_STEP_SUMMARY
